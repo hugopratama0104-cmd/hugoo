@@ -1,0 +1,2 @@
+# hugoo
+Biodata diri
