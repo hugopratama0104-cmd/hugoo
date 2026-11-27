@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biodata – [Nama Lengkap]</title>
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Warna: ubah di sini ===== */
+    :root {
+      --latar: #eef3f8;
+      --kaca: rgba(255, 255, 255, .72);
+      --kaca-garis: rgba(255, 255, 255, .9);
+      --tinta: #101c2b;
+      --redup: #5a6b7d;
+      --garis: rgba(16, 28, 43, .1);
+      --a1: #00b8a3;
+      --a2: #4f7cff;
+      --a3: #ffb547;
+      --bayangan: 0 12px 36px rgba(16, 28, 43, .08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --latar: #080e16; --kaca: rgba(22, 32, 46, .72); --kaca-garis: rgba(255, 255, 255, .08);
+        --tinta: #eaf1f8; --redup: #93a5b8; --garis: rgba(255, 255, 255, .1);
+        --a1: #2fe0c8; --a2: #7da0ff; --a3: #ffc766;
+        --bayangan: 0 12px 36px rgba(0, 0, 0, .45);
+      }
+    }
+    :root[data-theme="dark"] {
+      --latar: #080e16; --kaca: rgba(22, 32, 46, .72); --kaca-garis: rgba(255, 255, 255, .08);
+      --tinta: #eaf1f8; --redup: #93a5b8; --garis: rgba(255, 255, 255, .1);
+      --a1: #2fe0c8; --a2: #7da0ff; --a3: #ffc766;
+      --bayangan: 0 12px 36px rgba(0, 0, 0, .45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      position: relative; margin: 0; min-height: 100vh;
+      padding: 1.5rem 1.25rem 4rem;
+      background: var(--latar); color: var(--tinta);
+      font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.65; overflow-x: hidden;
+    }
+    h1, h2 { font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif; margin: 0; }
+    p { margin: 0; }
+    button { font: inherit; color: inherit; }
+
+    /* ===== Latar bergerak (hanya hiasan) ===== */
+    .latar { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(70px); }
+    .blob.b1 { width: 480px; height: 480px; background: color-mix(in srgb, var(--a1) 32%, transparent); top: -120px; left: -100px; animation: melayang 18s ease-in-out infinite; }
+    .blob.b2 { width: 520px; height: 520px; background: color-mix(in srgb, var(--a2) 28%, transparent); top: 30%; right: -160px; animation: melayang 22s ease-in-out infinite reverse; }
+    .blob.b3 { width: 400px; height: 400px; background: color-mix(in srgb, var(--a3) 26%, transparent); bottom: -120px; left: 25%; animation: melayang 26s ease-in-out infinite; }
+    @keyframes melayang { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(60px,-40px) scale(1.12); } }
+
+    .bungkus { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; }
+
+    /* ===== Tombol atas ===== */
+    .aksi { display: flex; justify-content: flex-end; gap: .6rem; margin-bottom: 1rem; }
+    .kaca-pil {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .5rem 1rem; font-size: .88rem; font-weight: 500;
+      background: var(--kaca); border: 1px solid var(--kaca-garis); border-radius: 999px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    button.kaca-pil { cursor: pointer; }
+    button.kaca-pil:hover { box-shadow: var(--bayangan); }
+    button:focus-visible { outline: 2px solid var(--a2); outline-offset: 3px; }
+    .kaca-pil svg { width: 16px; height: 16px; }
+
+    /* ===== Hero ===== */
+    .hero { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2.5rem; padding: 2rem 0 2.5rem; }
+    .sapaan { display: inline-flex; gap: .5rem; align-items: center; }
+    .sapaan::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--a1); }
+
+    .hero h1 {
+      margin: 1rem 0 .5rem; font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1.02; letter-spacing: -.03em;
+      background: linear-gradient(100deg, var(--tinta) 30%, var(--a2) 65%, var(--a1));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .profesi { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--redup); min-height: 1.8em; }
+    .profesi b { color: var(--tinta); font-weight: 600; }
+    .kursor { display: inline-block; width: 2px; height: 1.1em; margin-left: 3px; vertical-align: -.15em; background: var(--a1); animation: kedip 1s steps(1) infinite; }
+    @keyframes kedip { 50% { opacity: 0; } }
+
+    .foto-wrap { position: relative; width: 220px; height: 220px; padding: 7px; border-radius: 50%; }
+    .foto-wrap::before {
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--a1), var(--a2), var(--a3), var(--a1));
+      animation: putar 6s linear infinite;
+    }
+    @keyframes putar { to { transform: rotate(360deg); } }
+    .foto-dalam { position: relative; display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--latar); border: 5px solid var(--latar); }
+    .foto-dalam svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--redup); opacity: .7; }
+    .foto-dalam img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ===== Bento ===== */
+    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
+    .kartu {
+      position: relative; padding: 1.5rem;
+      background: var(--kaca); border: 1px solid var(--kaca-garis); border-radius: 22px;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--bayangan);
+    }
+    .kartu::before { content: ""; position: absolute; left: 1.5rem; top: 0; width: 44px; height: 4px; border-radius: 0 0 4px 4px; background: linear-gradient(90deg, var(--a1), var(--a2)); }
+    .kartu h2 { margin-bottom: 1rem; font-size: 1.15rem; letter-spacing: -.01em; }
+
+    .c-tentang { grid-column: span 4; }
+    .c-kontak  { grid-column: 5 / 7; grid-row: 1 / 3; }
+    .c-data    { grid-column: span 4; }
+    .c-pend    { grid-column: span 3; }
+    .c-hobi    { grid-column: span 3; }
+
+    .tentang { font-size: 1.05rem; max-width: 62ch; }
+
+    /* Kontak */
+    .kontak { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+    .kontak li { display: flex; align-items: center; gap: .8rem; font-size: .92rem; word-break: break-word; }
+    .ikon { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: #fff; background: linear-gradient(135deg, var(--a1), var(--a2)); }
+    .ikon svg { width: 18px; height: 18px; }
+
+    /* Data pribadi */
+    .data { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+    .item { padding: .8rem 1rem; border: 1px solid var(--garis); border-radius: 14px; }
+    .item span { display: block; font-size: .76rem; color: var(--redup); text-transform: uppercase; letter-spacing: .05em; }
+    .item strong { font-weight: 600; word-break: break-word; }
+    .item.lebar { grid-column: span 2; }
+    .item.umur strong { font-size: 1.4rem; font-family: "Space Grotesk", sans-serif; color: var(--a2); }
+
+    /* Pendidikan */
+    .garis-waktu { list-style: none; margin: 0; padding: 0 0 0 1.7rem; position: relative; }
+    .garis-waktu::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--a1), var(--a2), var(--a3)); }
+    .garis-waktu li { position: relative; padding-bottom: 1.3rem; }
+    .garis-waktu li:last-child { padding-bottom: 0; }
+    .garis-waktu li::before { content: ""; position: absolute; left: calc(-1.7rem + 1px); top: .4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--latar); border: 3px solid var(--a1); }
+    .tahun { display: inline-block; margin-bottom: .25rem; padding: .05rem .7rem; font-size: .76rem; font-weight: 600; color: #fff; border-radius: 999px; background: linear-gradient(90deg, var(--a1), var(--a2)); }
+    .garis-waktu strong { display: block; }
+    .garis-waktu p { color: var(--redup); font-size: .92rem; }
+
+    /* Hobi (interaktif: klik untuk memilih) */
+    .chip-hobi { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; margin: 0; padding: 0; }
+    .chip {
+      padding: .5rem 1.1rem; font-weight: 500; font-size: .93rem; cursor: pointer;
+      background: none; border: 1px solid var(--garis); border-radius: 999px;
+      transition: transform .2s, border-color .2s;
+    }
+    .chip:hover { transform: translateY(-3px) rotate(-2deg); border-color: var(--a2); }
+    .chip[aria-pressed="true"] { color: #fff; border-color: transparent; background: linear-gradient(135deg, var(--a2), var(--a1)); animation: pop .35s; }
+    .chip[aria-pressed="true"]::before { content: "♥ "; }
+    @keyframes pop { 50% { transform: scale(1.18); } }
+    .info-hobi { margin-top: 1rem; font-size: .85rem; color: var(--redup); }
+
+    canvas#konfeti { position: fixed; inset: 0; z-index: 65; pointer-events: none; }
+
+    /* ===== Muncul saat halaman dibuka ===== */
+    .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .js .reveal.masuk { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; justify-items: start; gap: 2rem; padding-top: 1rem; }
+      .foto-wrap { order: -1; width: 170px; height: 170px; }
+      .bento { grid-template-columns: 1fr; }
+      .c-tentang, .c-kontak, .c-data, .c-pend, .c-hobi { grid-column: 1; grid-row: auto; }
+      .data { grid-template-columns: repeat(2, 1fr); }
+      .item.lebar { grid-column: 1 / -1; }
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; color: #000; }
+      .latar, .aksi, .kursor, #konfeti, .info-hobi { display: none !important; }
+      .kartu { background: #fff; box-shadow: none; backdrop-filter: none; border: 1px solid #ccc; break-inside: avoid; }
+      .js .reveal { opacity: 1 !important; transform: none !important; }
+      .hero h1 { color: #000; background: none; }
+      .ikon, .tahun, .foto-wrap::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="latar" aria-hidden="true">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  </div>
+
+  <div class="bungkus">
+
+    <div class="aksi">
+      <button type="button" class="kaca-pil" id="tombol-tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span id="label-tema">Mode gelap</span>
+      </button>
+      <button type="button" class="kaca-pil" id="tombol-cetak">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        Simpan PDF
+      </button>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div>
+        <span class="kaca-pil sapaan">Halo, perkenalkan saya</span>
+        <h1>Hugo Pratama</h1>
+        <p class="profesi"><b id="ketik">Siswa</b><span class="kursor"></span></p>
+      </div>
+
+      <!-- Ganti profil.jpg dengan foto Anda (taruh di folder yang sama dengan file ini) -->
+      <div class="foto-wrap">
+        <span class="foto-dalam">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="9" r="4.2"/><path d="M3.5 22c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z"/></svg>
+          <img id="foto" src="hugo.jpeg"Foto [Nama Lengkap]">
+        </span>
+      </div>
+    </header>
+
+    <!-- ============ ISI ============ -->
+    <main class="bento">
+
+      <section class="kartu c-tentang reveal">
+        <h2>Tentang saya</h2>
+        <p class="tentang">Halo semuanya nama saya Hugo Pratama dipanggil Hugo saya berusia 16 tahun</p>
+      </section>
+
+      <section class="kartu c-kontak reveal">
+        <h2>Kontak</h2>
+        <ul class="kontak">
+          <li><span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>hugopratama0104@gmail.com</li>
+          <li><span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>0895342253331</li>
+          <li><span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>Jalan Duri Selatan VI No. 42n 2n, RT.3/RW.6, Duri Selatan, Tambora, KOTA JAKARTA BARAT, TAMBORA, DKI JAKARTA, ID, 11270</li>
+          <li><span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/></svg></span>NONE</li>
+        </ul>
+      </section>
+
+      <section class="kartu c-data reveal">
+        <h2>Data pribadi</h2>
+        <div class="data">
+          <div class="item lebar"><span>Nama lengkap</span><strong>Hugo Pratama</strong></div>
+          <div class="item umur"><span>Umur</span><strong id="umur">16</strong></div>
+          <div class="item lebar"><span>Tempat, tanggal lahir</span><strong>Jakarta,1 April 2010</strong></div>
+          <div class="item"><span>Jenis kelamin</span><strong>Laki-laki</strong></div>
+          <div class="item"><span>Agama</span><strong>Katolik</strong></div>
+          <div class="item"><span>Kewarganegaraan</span><strong>Indonesia</strong></div>
+          <div class="item"><span>Status</span><strong>Belum menikah</strong></div>
+        </div>
+      </section>
+
+      <section class="kartu c-pend reveal">
+        <h2>Pendidikan</h2>
+        <ul class="garis-waktu">
+          <li>
+            <span class="tahun">2013-2028</span>
+            <strong>Sekolah Damai</strong>
+            <p>IPA</p>
+          </li>
+          
+        </ul>
+      </section>
+
+      <section class="kartu c-hobi reveal">
+        <h2>Hobi</h2>
+        <ul class="chip-hobi">
+          <li><button type="button" class="chip" aria-pressed="false">Bermain Game</button></li>
+          <li><button type="button" class="chip" aria-pressed="false">Belajar</button></li>
+        
+        </ul>
+        <p class="info-hobi" id="info-hobi">Klik hobi yang sama dengan Anda.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <canvas id="konfeti" aria-hidden="true"></canvas>
+
+  <script>
+    // ============ ISI BAGIAN INI ============
+    // Tanggal lahir (YYYY-MM-DD), mis. "2000-01-31". Kosongkan ("") untuk menyembunyikan umur.
+    const TANGGAL_LAHIR = "";
+
+    // Profesi / status yang mengetik bergantian. Isi satu saja agar tidak bergantian.
+    const PROFESI = ["Siswa"];
+    // ========================================
+
+    const root = document.documentElement;
+    const $ = (s, el = document) => el.querySelector(s);
+    const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+    const kurangGerak = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const simpan = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+    const ambil = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+    // ---------- Mode gelap / terang ----------
+    const labelTema = $("#label-tema");
+    const sedangGelap = () => {
+      const p = root.getAttribute("data-theme");
+      return p ? p === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    };
+    const perbaruiLabel = () => { labelTema.textContent = sedangGelap() ? "Mode terang" : "Mode gelap"; };
+    const temaTersimpan = ambil("tema"); if (temaTersimpan) root.setAttribute("data-theme", temaTersimpan);
+    $("#tombol-tema").addEventListener("click", () => {
+      const baru = sedangGelap() ? "light" : "dark";
+      root.setAttribute("data-theme", baru); simpan("tema", baru); perbaruiLabel();
+    });
+    perbaruiLabel();
+
+    // ---------- Simpan PDF ----------
+    $("#tombol-cetak").addEventListener("click", () => print());
+
+    // ---------- Foto: siluet bawaan jika profil.jpg belum ada ----------
+    const foto = $("#foto");
+    foto.addEventListener("error", () => { foto.style.display = "none"; });
+
+    // ---------- Teks mengetik ----------
+    const elKetik = $("#ketik");
+    if (PROFESI.length > 1 && !kurangGerak) {
+      let i = 0, j = 0, hapus = false;
+      (function jalan() {
+        const kata = PROFESI[i]; elKetik.textContent = kata.slice(0, j);
+        let tunda = hapus ? 40 : 85;
+        if (!hapus && j === kata.length) { hapus = true; tunda = 1400; }
+        else if (hapus && j === 0) { hapus = false; i = (i + 1) % PROFESI.length; tunda = 350; }
+        else j += hapus ? -1 : 1;
+        setTimeout(jalan, tunda);
+      })();
+    } else if (PROFESI.length) elKetik.textContent = PROFESI[0];
+
+    // ---------- Kartu muncul saat di-scroll ----------
+    const reveal = $$(".reveal");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((l) => l.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("masuk"); io.unobserve(e.target); }
+      }), { threshold: .12 });
+      reveal.forEach((k, n) => { k.style.transitionDelay = (n % 3) * 90 + "ms"; io.observe(k); });
+    } else reveal.forEach((k) => k.classList.add("masuk"));
+
+    // ---------- Umur otomatis ----------
+    const elUmur = $("#umur"), lahir = TANGGAL_LAHIR ? new Date(TANGGAL_LAHIR) : null;
+    if (lahir && !isNaN(lahir)) {
+      const now = new Date();
+      let umur = now.getFullYear() - lahir.getFullYear();
+      if (now.getMonth() < lahir.getMonth() || (now.getMonth() === lahir.getMonth() && now.getDate() < lahir.getDate())) umur--;
+      elUmur.textContent = umur + " tahun";
+    } else elUmur.closest(".item").hidden = true;
+
+    // ============ HOBI (interaktif) ============
+    const kanvas = $("#konfeti"), ctx = kanvas.getContext("2d");
+    let partikel = [], anim = false;
+    function ukuran() { kanvas.width = innerWidth; kanvas.height = innerHeight; }
+    ukuran(); addEventListener("resize", ukuran);
+
+    function konfeti(x, y, jumlah) {
+      if (kurangGerak) return;
+      const cs = getComputedStyle(root);
+      const warna = ["--a1", "--a2", "--a3"].map((v) => cs.getPropertyValue(v).trim());
+      for (let i = 0; i < jumlah; i++) {
+        const sudut = Math.random() * Math.PI * 2, kec = 3 + Math.random() * 7;
+        partikel.push({ x, y, vx: Math.cos(sudut) * kec, vy: Math.sin(sudut) * kec - 4,
+          w: 5 + Math.random() * 6, h: 3 + Math.random() * 4, r: Math.random() * 6,
+          vr: (Math.random() - .5) * .4, c: warna[i % 3], umur: 1 });
+      }
+      if (!anim) { anim = true; requestAnimationFrame(gambar); }
+    }
+    function gambar() {
+      ctx.clearRect(0, 0, kanvas.width, kanvas.height);
+      partikel = partikel.filter((p) => p.umur > 0);
+      partikel.forEach((p) => {
+        p.vy += .22; p.x += p.vx; p.y += p.vy; p.vx *= .985; p.r += p.vr; p.umur -= .011;
+        ctx.save(); ctx.globalAlpha = Math.max(p.umur, 0); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+      });
+      if (partikel.length) requestAnimationFrame(gambar);
+      else { anim = false; ctx.clearRect(0, 0, kanvas.width, kanvas.height); }
+    }
+
+    const info = $("#info-hobi");
+    $$(".chip").forEach((c) => c.addEventListener("click", (e) => {
+      const nyala = c.getAttribute("aria-pressed") !== "true";
+      c.setAttribute("aria-pressed", nyala);
+      if (nyala) konfeti(e.clientX, e.clientY, 22);
+      const n = $$('.chip[aria-pressed="true"]').length;
+      info.textContent = n ? `Kita punya ${n} hobi yang sama!` : "Klik hobi yang sama dengan Anda.";
+    }));
+  </script>
+</body>
+</html>
